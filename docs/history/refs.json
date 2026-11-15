@@ -1,0 +1,449 @@
+{
+  "baseline": "d34076c3f7e9021185f19c5a881da0dcc9c69c53",
+  "bundle_requires_ppb_history": true,
+  "sources": {
+    "s7": "/run/media/retphilo/Data1/Uni/Polytech/S7/Eurobot/Eurobot/mam_eurobot_2026_T1",
+    "s8": "/run/media/retphilo/Data1/Uni/Polytech/S8/Eurobot/jon-snowbot"
+  },
+  "refs": [
+    {
+      "source": "s7",
+      "ref": "refs/heads/feature/path-follower",
+      "commit": "f593fd892d7bfb56902d3a2bee66008901cec11f",
+      "archived_ref": "refs/ancestors/s7/heads/feature/path-follower",
+      "disposition": "archived",
+      "commits_not_in_ppb": 1,
+      "subject": "added changes"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/heads/feature/strategy-simulation",
+      "commit": "546ec2bfe09fb3e6d710bec04cb4805ac61142a7",
+      "archived_ref": "refs/ancestors/s7/heads/feature/strategy-simulation",
+      "disposition": "archived",
+      "commits_not_in_ppb": 2,
+      "subject": "added stuff"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/heads/main",
+      "commit": "fc16b792b5c4b87da56a5dae7a55d15c600efab6",
+      "archived_ref": "refs/ancestors/s7/heads/main",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "Update README (again, again)"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/heads/path-planning",
+      "commit": "ce0306de363764f918224b83df368b66c7f059af",
+      "archived_ref": "refs/ancestors/s7/heads/path-planning",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "settings"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/heads/test",
+      "commit": "9dfd501ef40fbaaf52c91d33bf383baec2361fc7",
+      "archived_ref": "refs/ancestors/s7/heads/test",
+      "disposition": "archived",
+      "commits_not_in_ppb": 7,
+      "subject": "deleted the folder"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/1-ros-sim",
+      "commit": "60c93b720922cf7ad29e82d0743d35f8b62c5628",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/1-ros-sim",
+      "disposition": "archived",
+      "commits_not_in_ppb": 2,
+      "subject": "teleop control of the robot in gazebo"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/HEAD",
+      "commit": "385dbf2dcb9d5ab05999039c06f657a71838356c",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/HEAD",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "Merge pull request #5 from KarimSherry/feature/color_detection"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/env/edit_gitignore",
+      "commit": "e413293ffd4879fdad9bc2aa67f81acb3efac491",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/env/edit_gitignore",
+      "disposition": "archived",
+      "commits_not_in_ppb": 1,
+      "subject": "edit gitignore"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/aruco-marker",
+      "commit": "cdaccaadd511cee7f2bc7bca134af3dfed8432ac",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/aruco-marker",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "fix japanese comment"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/color_detection",
+      "commit": "2bfa3de64b13f806f147a78531221ef7fd43c27d",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/color_detection",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "visualize cursor frame"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/gripper",
+      "commit": "423357d4d41a5f0b21df2f297c6675c2a8747fb6",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/gripper",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "add README"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/install_ledge",
+      "commit": "50b84122deed3d13dd097407cca45b8a6f89dc9a",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/install_ledge",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "added new version of playmat"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/localization",
+      "commit": "415fcbae54697910b9c951daeb166f0944564aaf",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/localization",
+      "disposition": "archived",
+      "commits_not_in_ppb": 1,
+      "subject": "The localization folder has been created"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/path-follower",
+      "commit": "f593fd892d7bfb56902d3a2bee66008901cec11f",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/path-follower",
+      "disposition": "archived",
+      "commits_not_in_ppb": 1,
+      "subject": "added changes"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/set_competition_world",
+      "commit": "22e5e3207629a1b645ee50d582c858f96f6e4fef",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/set_competition_world",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "add s"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/feature/strategy-simulation",
+      "commit": "d444f8647da054da424fd31a3e31c8986ca2703e",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/feature/strategy-simulation",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "added meshes for the mecanum wheels and new movement folder"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/main",
+      "commit": "385dbf2dcb9d5ab05999039c06f657a71838356c",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/main",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "Merge pull request #5 from KarimSherry/feature/color_detection"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/path-planning",
+      "commit": "e2d3dd8907a59ca9b1d67b333d9031fdd3f6ef35",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/path-planning",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "solve no executable issue"
+    },
+    {
+      "source": "s7",
+      "ref": "refs/remotes/origin/test",
+      "commit": "9dfd501ef40fbaaf52c91d33bf383baec2361fc7",
+      "archived_ref": "refs/ancestors/s7/remotes/origin/test",
+      "disposition": "archived",
+      "commits_not_in_ppb": 7,
+      "subject": "deleted the folder"
+    },
+    {
+      "source": "s7",
+      "ref": "stash/0",
+      "commit": "db90f3b5dd0e08e0b55422d96d8348049501ed0e",
+      "archived_ref": "refs/ancestors/s7/stash/0",
+      "disposition": "archived",
+      "commits_not_in_ppb": 2,
+      "subject": "WIP on feature/path-follower: 771aa83 the robot moves with a test movement file. strafing doesn't work yet"
+    },
+    {
+      "source": "s7",
+      "ref": "stash/1",
+      "commit": "28602f861df5e0550fb84b09b152e8ad60ac1a09",
+      "archived_ref": "refs/ancestors/s7/stash/1",
+      "disposition": "archived",
+      "commits_not_in_ppb": 2,
+      "subject": "WIP on feature/path-follower: 771aa83 the robot moves with a test movement file. strafing doesn't work yet"
+    },
+    {
+      "source": "s7",
+      "ref": "stash/2",
+      "commit": "809dc79a7d876f6d86a2590a297709ce378e4093",
+      "archived_ref": "refs/ancestors/s7/stash/2",
+      "disposition": "archived",
+      "commits_not_in_ppb": 2,
+      "subject": "WIP on path-planning: ce0306d settings"
+    },
+    {
+      "source": "s7",
+      "ref": "stash/3",
+      "commit": "2b9f67515e01d10acb1656f63621169231486b40",
+      "archived_ref": "refs/ancestors/s7/stash/3",
+      "disposition": "archived",
+      "commits_not_in_ppb": 2,
+      "subject": "WIP on feature/strategy-simulation: 64173b6 added the py file and fixed the arena issue"
+    },
+    {
+      "source": "s7",
+      "ref": "stash/4",
+      "commit": "c458cd57c80e029a8b0e200fcfb04fa952cf3f9b",
+      "archived_ref": "refs/ancestors/s7/stash/4",
+      "disposition": "archived",
+      "commits_not_in_ppb": 9,
+      "subject": "WIP on test: 9dfd501 deleted the folder"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/heads/electronics-documentation",
+      "commit": "2b4572c8e4ea29cc6ba039aaa16b9fdab21df9d0",
+      "archived_ref": "refs/ancestors/s8/heads/electronics-documentation",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "I added the documentation of the electronics part, the BOM and the circuits diagrams"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/heads/feature/vision-gripper",
+      "commit": "de90c8f71a9b1598513aa5db25878cccf9f2122a",
+      "archived_ref": "refs/ancestors/s8/heads/feature/vision-gripper",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "added documentation to connect to RDK using vnc"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/heads/main",
+      "commit": "5c855cf5e7fb65be8010d61b204ff233d0eefcc6",
+      "archived_ref": "refs/ancestors/s8/heads/main",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "Merge branch 'feature/vision-gripper'"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/heads/ultrasonic-sensor-pid",
+      "commit": "149cc17ee4b265ec157b2743382ba18172ec7f27",
+      "archived_ref": "refs/ancestors/s8/heads/ultrasonic-sensor-pid",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "All the work done related to ultrasonic sensor & PID"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/1-ros-sim",
+      "commit": "60c93b720922cf7ad29e82d0743d35f8b62c5628",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/1-ros-sim",
+      "disposition": "archived",
+      "commits_not_in_ppb": 2,
+      "subject": "teleop control of the robot in gazebo"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/HEAD",
+      "commit": "5c855cf5e7fb65be8010d61b204ff233d0eefcc6",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/HEAD",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "Merge branch 'feature/vision-gripper'"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/adding-solidworks-design",
+      "commit": "8921e5dec4ad286d24742b1c8a449a9fe8dc4b78",
+      "archived_ref": null,
+      "disposition": "excluded: obsolete CAD"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/electronics-documentation",
+      "commit": "2b4572c8e4ea29cc6ba039aaa16b9fdab21df9d0",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/electronics-documentation",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "I added the documentation of the electronics part, the BOM and the circuits diagrams"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/env/edit_gitignore",
+      "commit": "e413293ffd4879fdad9bc2aa67f81acb3efac491",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/env/edit_gitignore",
+      "disposition": "archived",
+      "commits_not_in_ppb": 1,
+      "subject": "edit gitignore"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/aruco-marker",
+      "commit": "cdaccaadd511cee7f2bc7bca134af3dfed8432ac",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/aruco-marker",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "fix japanese comment"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/color_detection",
+      "commit": "2bfa3de64b13f806f147a78531221ef7fd43c27d",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/color_detection",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "visualize cursor frame"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/gripper",
+      "commit": "86f02b1dcd92619ab3c2b7d327fd0076610adc48",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/gripper",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "made base link visual small"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/install_ledge",
+      "commit": "50b84122deed3d13dd097407cca45b8a6f89dc9a",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/install_ledge",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "added new version of playmat"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/localization",
+      "commit": "415fcbae54697910b9c951daeb166f0944564aaf",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/localization",
+      "disposition": "archived",
+      "commits_not_in_ppb": 1,
+      "subject": "The localization folder has been created"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/path-follower",
+      "commit": "f593fd892d7bfb56902d3a2bee66008901cec11f",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/path-follower",
+      "disposition": "archived",
+      "commits_not_in_ppb": 1,
+      "subject": "added changes"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/path-planning",
+      "commit": "ac605dbf5e779740e5e8e3af559ccbb9823c3b35",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/path-planning",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "add issues on camera"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/set_competition_world",
+      "commit": "22e5e3207629a1b645ee50d582c858f96f6e4fef",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/set_competition_world",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "add s"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/strategy-simulation",
+      "commit": "d444f8647da054da424fd31a3e31c8986ca2703e",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/strategy-simulation",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "added meshes for the mecanum wheels and new movement folder"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/feature/vision-gripper",
+      "commit": "de90c8f71a9b1598513aa5db25878cccf9f2122a",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/feature/vision-gripper",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "added documentation to connect to RDK using vnc"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/main",
+      "commit": "5c855cf5e7fb65be8010d61b204ff233d0eefcc6",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/main",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "Merge branch 'feature/vision-gripper'"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/test",
+      "commit": "9dfd501ef40fbaaf52c91d33bf383baec2361fc7",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/test",
+      "disposition": "archived",
+      "commits_not_in_ppb": 7,
+      "subject": "deleted the folder"
+    },
+    {
+      "source": "s8",
+      "ref": "refs/remotes/origin/ultrasonic-sensor-pid",
+      "commit": "149cc17ee4b265ec157b2743382ba18172ec7f27",
+      "archived_ref": "refs/ancestors/s8/remotes/origin/ultrasonic-sensor-pid",
+      "disposition": "archived",
+      "commits_not_in_ppb": 0,
+      "subject": "All the work done related to ultrasonic sensor & PID"
+    }
+  ],
+  "missing_commits": [
+    "300ca86b2bac2a6750df22078f09c0ada3ef95ef",
+    "f80f683697b4e2904be7221f03e42a7cd2b9b14c",
+    "381d514fecdb9d9feec0a540c0161f961619c3a1",
+    "69bc03a0a58f50eb9301fd6e2dfd77658d34bf42",
+    "21616a0d575a274e992a74b264be0d8a20b74ade",
+    "6c94c176a1aab86c7bdd4954223dcc3bb5e98b37",
+    "9dfd501ef40fbaaf52c91d33bf383baec2361fc7",
+    "c441fb2029c2c31f1907212026eaf3ea58c98f60",
+    "60c93b720922cf7ad29e82d0743d35f8b62c5628",
+    "e413293ffd4879fdad9bc2aa67f81acb3efac491",
+    "9f2f4cb8a46acc1511599664e83198e4abc53d61",
+    "c458cd57c80e029a8b0e200fcfb04fa952cf3f9b",
+    "5590dba7e94ed780b745a866c36a102572778db7",
+    "2b9f67515e01d10acb1656f63621169231486b40",
+    "415fcbae54697910b9c951daeb166f0944564aaf",
+    "d9126c23c96ed814683de33f9e92499cbebf2b14",
+    "0ae3c464c0673839bda76ac70e2d7b8076a75df3",
+    "809dc79a7d876f6d86a2590a297709ce378e4093",
+    "546ec2bfe09fb3e6d710bec04cb4805ac61142a7",
+    "895f16a4b4f9b781f86e877fc70f4a3df9dc9df9",
+    "28602f861df5e0550fb84b09b152e8ad60ac1a09",
+    "97d6222b859b203aba6a8ac9a9483df2fd830825",
+    "db90f3b5dd0e08e0b55422d96d8348049501ed0e",
+    "f593fd892d7bfb56902d3a2bee66008901cec11f"
+  ],
+  "bundle_sha256": "ac8a08e9b83693a3476e0161d98053513ba0e6d218ce2d2313fa8cd44731e6f5"
+}

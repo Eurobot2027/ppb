@@ -66,7 +66,7 @@ setup(
             'dammy_TF = mam_eurobot_2026.path_planning.dammy_TF:main',
             'true_tf_from_odom = mam_eurobot_2026.localization.true_tf_from_odom:main',
             'gt_pose_to_map_tf = mam_eurobot_2026.localization.gt_pose_to_map_tf:main',
-            'strategy_tree = mam_eurobot_2026.behavior_tree.strategy_tree:main',
+            'teleop_keyboard = mam_eurobot_2026.teleop.teleop_keyboard:main',
             'task_manager_fsm = mam_eurobot_2026.task_manager.task_manager_fsm:main',
             'gripper_keyboard = mam_eurobot_2026.gripper.keyboard_gripper:main',
             'path_follow_client = mam_eurobot_2026.movement.path_follow_client:main',

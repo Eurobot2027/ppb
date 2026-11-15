@@ -1,0 +1,13 @@
+diff --git a/mam_eurobot_2026/launch/pathplanning_demo.launch.py b/mam_eurobot_2026/launch/pathplanning_demo.launch.py
+index d82a1f5..f8e4190 100644
+--- a/mam_eurobot_2026/launch/pathplanning_demo.launch.py
++++ b/mam_eurobot_2026/launch/pathplanning_demo.launch.py
+@@ -8,7 +8,7 @@ from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+ from launch_ros.actions import Node
+ import yaml
+ 
+-MAC = True
++MAC = False
+ current_display = os.environ.get('DISPLAY', ':0')  # get current DISPLAY
+ print(f"Detected DISPLAY: {current_display}")
+ 

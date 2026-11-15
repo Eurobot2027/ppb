@@ -1,4 +1,4 @@
-# test launch file for Mac (cleaned)
+# Native launch: inherit the host user and desktop environment.
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
@@ -29,24 +29,17 @@ def _spawn_model_cmd(file_uri: str, name: str, x: float, y: float, z: float, Y: 
 def generate_launch_description():
     # path sharing package
     pkg_share = FindPackageShare('mam_eurobot_2026')
+    model_path = PathJoinSubstitution([pkg_share, 'models'])
 
     # ============ Environment Virables ============
     env_actions = [
-        SetEnvironmentVariable('DISPLAY', ':1'),  # VNC / Xvfb
-        SetEnvironmentVariable('HOME', '/home/rosdev'),
-        SetEnvironmentVariable('ROS_LOG_DIR', '/home/rosdev/.ros/log'),
-        SetEnvironmentVariable('XDG_RUNTIME_DIR', '/tmp/runtime-rosdev'),
-        SetEnvironmentVariable('LIBGL_ALWAYS_SOFTWARE', '1'),
-        SetEnvironmentVariable('IGN_RENDER_ENGINE', 'ogre2'),
-        SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', pkg_share),
-        ExecuteProcess(
-            cmd=[
-                '/bin/bash', '-lc',
-                'mkdir -p /home/rosdev/.ros/log '
-                '&& mkdir -p /tmp/runtime-rosdev '
-                '&& chmod 700 /tmp/runtime-rosdev'
-            ],
-            output='screen'
+        SetEnvironmentVariable(
+            'GZ_SIM_RESOURCE_PATH',
+            [pkg_share, ':', model_path, ':', os.environ.get('GZ_SIM_RESOURCE_PATH', '')],
+        ),
+        SetEnvironmentVariable(
+            'IGN_GAZEBO_RESOURCE_PATH',
+            [pkg_share, ':', model_path, ':', os.environ.get('IGN_GAZEBO_RESOURCE_PATH', '')],
         ),
     ]
 
@@ -133,23 +126,11 @@ def generate_launch_description():
     )
 
     # ============ RViz ============
-    rviz_env = {
-        'DISPLAY': ':1',
-        'LIBGL_ALWAYS_SOFTWARE': '1',
-        'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:' + os.environ.get('LD_LIBRARY_PATH', ''),
-        'HOME': '/home/rosdev',
-        'ROS_LOG_DIR': '/home/rosdev/.ros/log',
-        'XDG_RUNTIME_DIR': '/tmp/runtime-rosdev',
-        'RCUTILS_LOGGING_USE_STDOUT': '1',
-        'AMENT_PREFIX_PATH': os.environ.get('AMENT_PREFIX_PATH', ''),
-    }
-
     rviz = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='screen',
-        env=rviz_env,
         # parameters=[{'use_sim_time': True}],  # delete comment if necessary
     )
 

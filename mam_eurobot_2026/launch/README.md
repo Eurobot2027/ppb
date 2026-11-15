@@ -1,4 +1,26 @@
 # Launch Files
+
+## Native operation and recovery status
+
+Use [native setup](../../docs/NATIVE_SETUP.md); no container is required. The
+competition, test-arena and path-planning demos now inherit the host user/display
+and preserve existing model search paths. Removed forced `/home/rosdev`, VNC `:1`,
+container graphics-library paths and global `pkill -9` calls. The staging planner
+executable now matches the installed console script. These files have been
+syntax-checked, not run with ROS/Gazebo on the recovery host.
+
+The unmerged `1-ros-sim` keyboard controller is restored as an installed
+`teleop_keyboard` command; its old launch file was not copied because its source
+path fallback was invalid. Run keyboard teleop in a real terminal, separately
+from the simulator. There is no automatic hardware startup.
+
+All worlds/maps/actions below remain **2026**. The existing model mixes old/new
+simulator plugin names and the upstream coordinate failures below remain open.
+Do not launch every demo together; they can publish competing TF and commands.
+For Pi vision use [camera](../../camera/README.md), which needs neither a display
+nor this simulation. `robot_pose_from_beacon` is not started by the vision launch;
+start it explicitly only after configuring its external-camera geometry.
+
 Reference for the ROS 2 launch files in `mam_eurobot_2026/launch`: what each one starts and what it expects to already be running.
 
 ## competition_arena.launch.py

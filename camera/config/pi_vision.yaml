@@ -1,0 +1,16 @@
+# Bench defaults, not the 2027 marker specification. Load with --params-file.
+camera:
+  ros__parameters:
+    backend: picamera2
+    camera_index: 0
+    width: 640
+    height: 480
+    fps: 15.0
+    frame_id: front_camera_optical_frame
+    calibration_file: ''
+aruco:
+  ros__parameters:
+    dictionary: DICT_4X4_50
+    marker_length_m: 0.0
+    stale_timeout_sec: 1.0
+    max_image_age_sec: 1.0

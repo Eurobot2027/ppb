@@ -1,4 +1,23 @@
 # Task Manager Nodes
+
+## Recovery and 2027 status
+
+This FSM is already inherited, beginning with task-manager development such as
+`9a73626`. The old test branch contains only text placeholders, not another
+strategy implementation. `setup.py` previously advertised a nonexistent
+`behavior_tree.strategy_tree`; that dead entry is removed. Use this actual FSM
+only as a 2026 reference.
+
+Useful patterns: explicit states/timeouts, target selection, navigation goals,
+grasp verification and recovery. Crates, cursor hooks, pantry allocation and nest
+return are **2026 game logic**. The full demo was reported not working reliably,
+especially its initial cursor route and coordinate alignment.
+
+For 2027, redesign actions/scoring/timing from current rules and provide generic
+actuator commands plus completion/fault feedback from ESP32. The new camera TCP
+observations do not drive this FSM. Do not treat the old gripper or joint-state
+verification as a requirement for the replacement mechanism.
+
 Reference for the ROS 2 nodes in `mam_eurobot_2026/task_manager`: what each one does, its topics/parameters, and how to launch it.
 
 ## task_manager_fsm

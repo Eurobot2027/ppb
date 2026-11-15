@@ -1,3 +1,29 @@
 .devcontainer/devcontainer.json
 .DS_Store
 __pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+build/
+install/
+log/
+camera/runs/
+
+# Local editor settings and Python packaging/test output
+.vscode/
+*.egg-info/
+.eggs/
+dist/
+.coverage
+.coverage.*
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# ROS runtime recordings and logs (keep calibration/history fixtures tracked)
+.ros/
+rosbags/
+*.db3
+*.db3-shm
+*.db3-wal
+*.mcap

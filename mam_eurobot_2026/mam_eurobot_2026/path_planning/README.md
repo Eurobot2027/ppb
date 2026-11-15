@@ -1,4 +1,22 @@
 # Path Planning Nodes
+
+## Recovery and 2027 status
+
+The staging, task-goal and fixed-goal planners, map generator, Nav2 parameters,
+footprint YAML and RViz assets were already merged (`ac605db` is in PPB ancestry).
+No newer hidden planning algorithm was found. The alternate `field.pgm` from S7
+local strategy work is preserved in history rather than overwriting today's map.
+
+These assets encode the **2026 field and objects**. `field.yaml`, `objects.yaml`,
+`robot_model.yaml`, Nav2 costmaps and all goals must be replaced/reviewed against
+2027 rules and the actual robot footprint. Existing reports say planning can
+reject robot/goal positions as outside the map; verify origin, axes, resolution
+and TF alignment before tuning planner parameters. Recovery does not resolve that
+runtime issue. The planning demo's executable name now matches `setup.py`.
+
+Pi hardware vision can run without this ROS stack. Select a navigation stack
+after measuring Pi resources and defining ESP32 command/odometry interfaces.
+
 Reference for the ROS 2 nodes in `mam_eurobot_2026/path_planning`: what each one does, its topics/parameters, and how to launch it.
 
 ## staging_path_planner

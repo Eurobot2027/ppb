@@ -1,9 +1,17 @@
+# Historical 2026 simulation settings, not a 2027 field configuration.
 global:
   horizontal_fov_deg: 60.0
   image_width: 640
   image_height: 480
   aruco_dictionary: DICT_4X4_50
 
+# Mobile cameras already positioned by the robot URDF, not by static marker solve.
+image_sources:
+  /front_camera:
+    name: front_camera
+    frame_id: front_camera_optical_frame
+
+# Fixed observation cameras whose map poses are solved from reference markers.
 cameras:
   - name: observation_device
     image_topic: /top_camera/image_3

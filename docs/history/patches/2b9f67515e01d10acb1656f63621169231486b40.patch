@@ -1,0 +1,224 @@
+diff --git a/mam_eurobot_2026/launch/competition_arena.launch.py b/mam_eurobot_2026/launch/competition_arena.launch.py
+index 614bedb..c993328 100644
+--- a/mam_eurobot_2026/launch/competition_arena.launch.py
++++ b/mam_eurobot_2026/launch/competition_arena.launch.py
+@@ -119,6 +119,16 @@ def generate_launch_description():
+             '/omni/rear_right_speed@std_msgs/msg/Float64@gz.msgs.Double',
+         ],
+     )
++    cmd_vel_bridge = Node(
++        package='ros_gz_bridge',
++        executable='parameter_bridge',
++        name='cmd_vel_bridge',
++        output='screen',
++        arguments=[
++            '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'
++        ],
++    )
++
+ 
+     # ---------------- Bridges: camera ----------------
+     img_bridge = Node(
+@@ -169,7 +179,8 @@ def generate_launch_description():
+         world_arg,
+         ign,
+         spawn_after_ign,
+-        wheel_bridges,     # <—— added
++        wheel_bridges,
++        cmd_vel_bridge,
+         img_bridge,
+         camera_bridge,
+         rviz,
+diff --git a/mam_eurobot_2026/mam_eurobot_2026/wheel_controller.py b/mam_eurobot_2026/mam_eurobot_2026/wheel_controller.py
+index b39b850..68f623b 100644
+--- a/mam_eurobot_2026/mam_eurobot_2026/wheel_controller.py
++++ b/mam_eurobot_2026/mam_eurobot_2026/wheel_controller.py
+@@ -7,6 +7,7 @@ Controls the four wheels of the robot via velocity commands.
+ import rclpy
+ from rclpy.node import Node
+ from std_msgs.msg import Float64
++from geometry_msgs.msg import Twist
+ import time
+ 
+ 
+@@ -19,6 +20,7 @@ class WheelController(Node):
+         self.front_right_pub = self.create_publisher(Float64, '/omni/front_right_speed', 10)
+         self.rear_left_pub = self.create_publisher(Float64, '/omni/rear_left_speed', 10)
+         self.rear_right_pub = self.create_publisher(Float64, '/omni/rear_right_speed', 10)
++        self.strafe_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+                 
+         self.get_logger().info('Wheel controller initialized. Topics:')
+         self.get_logger().info('  - /omni/front_left_speed')
+@@ -81,15 +83,27 @@ class WheelController(Node):
+             # Left side forward, right side backward
+             self.publish_wheel_velocities(speed, -speed, speed, -speed)
+     
+-    def strafe_left(self, speed: float = 1.0):
++    def publish_strafe(self, vy):
++        """Publish lateral velocity (vy)."""
++        cmd = Twist()
++        cmd.linear.x = 0.0     # no forward
++        cmd.linear.y = vy      # ONLY strafing
++        cmd.angular.z = 0.0    # no rotation
++
++        self.strafe_pub.publish(cmd)
++        self.get_logger().info(f'Publishing cmd_vel: vy={vy:.2f}')
++
++    def strafe_left(self, speed = 1):
+         """Strafe left (move sideways left)."""
+         # All wheels rotate in same direction for omnidirectional left strafe
+-        self.publish_wheel_velocities(-speed, speed, speed, -speed)
++        self.publish_wheel_velocities(0.0, 0.0, 0.0, 0.0)
++        self.publish_strafe(-speed)
+     
+-    def strafe_right(self, speed: float = 1.0):
++    def strafe_right(self, speed = 1):
+         """Strafe right (move sideways right)."""
+         # All wheels rotate in same direction for omnidirectional right strafe
+-        self.publish_wheel_velocities(speed, -speed, -speed, speed)
++        self.publish_wheel_velocities(0.0, 0.0, 0.0, 0.0)
++        self.publish_strafe(speed)
+ 
+ 
+ def main(args=None):
+@@ -100,7 +114,7 @@ def main(args=None):
+         controller.get_logger().info('Starting wheel control demo...')
+         
+         # Demo sequence
+-        speed = 2.0  # rad/s
++        speed = 10.0  # rad/s
+         
+         controller.get_logger().info('\n--- Moving Forward ---')
+         controller.move_forward(speed)
+@@ -127,11 +141,11 @@ def main(args=None):
+         time.sleep(3)
+         
+         controller.get_logger().info('\n--- Strafing Left ---')
+-        controller.strafe_left(speed)
++        controller.strafe_left(10)
+         time.sleep(3)
+         
+         controller.get_logger().info('\n--- Strafing Right ---')
+-        controller.strafe_right(speed)
++        controller.strafe_right(10)
+         time.sleep(3)
+         
+         controller.get_logger().info('\n--- Stopping ---')
+diff --git a/mam_eurobot_2026/models/simple_robot/model.sdf b/mam_eurobot_2026/models/simple_robot/model.sdf
+index 9777fc0..6694915 100644
+--- a/mam_eurobot_2026/models/simple_robot/model.sdf
++++ b/mam_eurobot_2026/models/simple_robot/model.sdf
+@@ -52,21 +52,10 @@
+         <surface>
+           <friction>
+             <ode>
+-              <mu>1</mu>
+-              <mu2>0.01</mu2>
+-              <fdir1>0 0 0</fdir1>
+-              <slip1>0</slip1>
+-              <slip2>0</slip2>
++              <mu>1.0</mu>          <!-- high friction along roller direction -->
++              <mu2>0.05</mu2>       <!-- low friction perpendicular -->
++              <fdir1>1 -0.707 0</fdir1>
+             </ode>
+-            <torsional>
+-              <coefficient>0.1</coefficient>
+-              <patch_radius>0</patch_radius>
+-              <surface_radius>0</surface_radius>
+-              <use_patch_radius>1</use_patch_radius>
+-              <ode>
+-                <slip>0</slip>
+-              </ode>
+-            </torsional>
+           </friction>
+         </surface>
+       </collision>
+@@ -92,21 +81,10 @@
+         <surface>
+           <friction>
+             <ode>
+-              <mu>1</mu>
+-              <mu2>0.01</mu2>
+-              <fdir1>0 0 0</fdir1>
+-              <slip1>0</slip1>
+-              <slip2>0</slip2>
++              <mu>1.0</mu>          <!-- high friction along roller direction -->
++              <mu2>0.05</mu2>       <!-- low friction perpendicular -->
++              <fdir1>1 0.707 0</fdir1>
+             </ode>
+-            <torsional>
+-              <coefficient>0.1</coefficient>
+-              <patch_radius>0</patch_radius>
+-              <surface_radius>0</surface_radius>
+-              <use_patch_radius>1</use_patch_radius>
+-              <ode>
+-                <slip>0</slip>
+-              </ode>
+-            </torsional>
+           </friction>
+         </surface>
+       </collision>
+@@ -132,21 +110,10 @@
+         <surface>
+           <friction>
+             <ode>
+-              <mu>1</mu>
+-              <mu2>0.01</mu2>
+-              <fdir1>0 0 0</fdir1>
+-              <slip1>0</slip1>
+-              <slip2>0</slip2>
++              <mu>1.0</mu>          <!-- high friction along roller direction -->
++              <mu2>0.05</mu2>       <!-- low friction perpendicular -->
++              <fdir1>1 0.707 0</fdir1>
+             </ode>
+-            <torsional>
+-              <coefficient>0.1</coefficient>
+-              <patch_radius>0</patch_radius>
+-              <surface_radius>0</surface_radius>
+-              <use_patch_radius>1</use_patch_radius>
+-              <ode>
+-                <slip>0</slip>
+-              </ode>
+-            </torsional>
+           </friction>
+         </surface>
+       </collision>
+@@ -172,21 +139,10 @@
+         <surface>
+           <friction>
+             <ode>
+-              <mu>1</mu>
+-              <mu2>0.01</mu2>
+-              <fdir1>0 0 0</fdir1>
+-              <slip1>0</slip1>
+-              <slip2>0</slip2>
++              <mu>1.0</mu>          <!-- high friction along roller direction -->
++              <mu2>0.05</mu2>       <!-- low friction perpendicular -->
++              <fdir1>1 -0.707 0</fdir1>
+             </ode>
+-            <torsional>
+-              <coefficient>0.1</coefficient>
+-              <patch_radius>0</patch_radius>
+-              <surface_radius>0</surface_radius>
+-              <use_patch_radius>1</use_patch_radius>
+-              <ode>
+-                <slip>0</slip>
+-              </ode>
+-            </torsional>
+           </friction>
+         </surface>
+       </collision>
+@@ -292,7 +248,12 @@
+       <topic>/omni/rear_right_speed</topic>
+     </plugin>
+ 
+-
++    <plugin name="ignition::gazebo::systems::VelocityControl"
++            filename="libignition-gazebo-velocity-control-system.so">
++      <topic>/cmd_vel</topic>
++      <use_twist>true</use_twist>
++      <world_frame>true</world_frame>
++    </plugin>
+ 
+   </model>
+ </sdf>

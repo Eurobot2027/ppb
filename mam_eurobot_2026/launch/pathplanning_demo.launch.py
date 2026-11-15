@@ -3,14 +3,11 @@ from typing import List
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable, ExecuteProcess
+from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 import yaml
 
-MAC = True
-current_display = os.environ.get('DISPLAY', ':0')  # get current DISPLAY
-print(f"Detected DISPLAY: {current_display}")
 
 def _load_footprint(robot_model_path: str) -> List[List[float]]:
     try:
@@ -52,48 +49,16 @@ def generate_launch_description() -> LaunchDescription:
     global_costmap_override = {"global_costmap": {"ros__parameters": {"footprint": footprint_str}}}
     local_costmap_override = {"local_costmap": {"ros__parameters": {"footprint": footprint_str}}}
 
-    if MAC:
-        env_actions = [
-            SetEnvironmentVariable('DISPLAY', ':1'),  # VNC / Xvfb
-            SetEnvironmentVariable('HOME', '/home/rosdev'),
-            SetEnvironmentVariable('ROS_LOG_DIR', '/home/rosdev/.ros/log'),
-            SetEnvironmentVariable('XDG_RUNTIME_DIR', '/tmp/runtime-rosdev'),
-            SetEnvironmentVariable('LIBGL_ALWAYS_SOFTWARE', '1'),
-            SetEnvironmentVariable('IGN_RENDER_ENGINE', 'ogre2'),
-            # make path of resource of Gazebo 
-            SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', pkg_share),
-            SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', model_path),
-            ExecuteProcess(
-                cmd=[
-                    '/bin/bash', '-lc',
-                    'mkdir -p /home/rosdev/.ros/log '
-                    '&& mkdir -p /tmp/runtime-rosdev '
-                    '&& chmod 700 /tmp/runtime-rosdev'
-                ],
-                output='screen'
-            ),
-        ]
-    else:
-        env_actions = [
-            SetEnvironmentVariable('DISPLAY', current_display), # use current DISPLAY
-            SetEnvironmentVariable('HOME', '/home/rosdev'),
-            SetEnvironmentVariable('ROS_LOG_DIR', '/home/rosdev/.ros/log'),
-            SetEnvironmentVariable('XDG_RUNTIME_DIR', '/tmp/runtime-rosdev'),
-            SetEnvironmentVariable('LIBGL_ALWAYS_SOFTWARE', '1'),
-            SetEnvironmentVariable('IGN_RENDER_ENGINE', 'ogre2'),
-            # make path of resource of Gazebo 
-            SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', pkg_share),
-            SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', model_path),
-            ExecuteProcess(
-                cmd=[
-                    '/bin/bash', '-lc',
-                    'mkdir -p /home/rosdev/.ros/log '
-                    '&& mkdir -p /tmp/runtime-rosdev '
-                    '&& chmod 700 /tmp/runtime-rosdev'
-                ],
-                output='screen'
-            ),
-        ]
+    env_actions = [
+        SetEnvironmentVariable(
+            'GZ_SIM_RESOURCE_PATH',
+            [pkg_share, ':', model_path, ':', os.environ.get('GZ_SIM_RESOURCE_PATH', '')],
+        ),
+        SetEnvironmentVariable(
+            'IGN_GAZEBO_RESOURCE_PATH',
+            [pkg_share, ':', model_path, ':', os.environ.get('IGN_GAZEBO_RESOURCE_PATH', '')],
+        ),
+    ]
 
     return LaunchDescription(
         [
@@ -128,7 +93,7 @@ def generate_launch_description() -> LaunchDescription:
             ),
             Node(
                 package="mam_eurobot_2026",
-                executable="staging_path_planner_node.py",
+                executable="staging_path_planner_node",
                 name="staging_path_planner",
                 output="screen",
                 parameters=[{"objects_yaml": objects_yaml}],

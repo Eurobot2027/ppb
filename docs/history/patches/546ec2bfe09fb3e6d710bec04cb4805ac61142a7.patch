@@ -1,0 +1,4902 @@
+diff --git a/mam_eurobot_2026/mam_eurobot_2026/path_planning/field.pgm b/mam_eurobot_2026/mam_eurobot_2026/path_planning/field.pgm
+new file mode 100644
+index 0000000000000000000000000000000000000000..9fbf4d5e89f0b75e993158630e2d28e0b49915ea
+GIT binary patch
+literal 15059
+zcmeIw!D_-l7)4>%d5VFqD^ZDk00nUo$tzSEL@24GRp`^FxEh9mcmk!1a%MF%UM4@E
+zx2cM!u<6^^ul6k*zr$`{H{sUypXZM*tmfr>9hyTOF7MaV^SLV)RT&m#SuCrnn7Jkh
+z3?u7h!aLKVBOe{^FOB`~R8dE(w0BV^-)W^)D!@;9o8pbVN*$w2zSBypRDhrIHpLrz
+zl{!Y5eD}y|n?Ci6r+k)p^JuD={L7tFac!-%;sQKrue9O<JZZ1A;sQKrue9O<JZZ1A
+z;sQKrue9O<JZZ1A;sQKrue9O<JZZ1A;sQKrue9O<JZZ1A;sQKrue9O<JZZ1A;sQKr
+rue9O<JZZ1A;sQKrue9O<JZZ1A;sQKrue9O<JZZ1~gVp_CbP<6cLBLW)
+
+literal 0
+HcmV?d00001
+
+diff --git a/mam_eurobot_2026/models/simple_robot/_model.sdf b/mam_eurobot_2026/models/simple_robot/_model.sdf
+new file mode 100644
+index 0000000..24e1067
+--- /dev/null
++++ b/mam_eurobot_2026/models/simple_robot/_model.sdf
+@@ -0,0 +1,2932 @@
++<?xml version="1.0"?>
++<sdf version="1.9">
++  <model name="omni_like_robot" canonical_link="chassis">
++    <pose>0 0 0 0 0 0</pose>
++
++    <!-- CHASSIS -->
++    <link name="chassis">
++      <pose>0 0 0.05 0 0 0</pose>
++      <inertial>
++        <mass>1.0</mass>
++        <inertia>
++          <ixx>0.07315</ixx>
++          <iyy>0.151641</iyy>
++          <izz>0.219727</izz>
++          <ixy>-0.0</ixy>
++          <iyz>0.0</iyz>
++          <ixz>-2.7e-05</ixz>
++        </inertia>
++      </inertial>
++      <visual name="chassis_visual">
++        <geometry>
++          <mesh>
++            <uri>meshes/base_link.stl</uri>
++            <scale>0.001 0.001 0.001</scale>
++          </mesh>
++        </geometry>
++        <material>
++          <ambient>0.0 0.612 0.867 1</ambient>
++          <diffuse>0.0 0.612 0.867 1</diffuse>
++        </material>
++      </visual>
++      <collision name="chassis_collision">
++        <geometry>
++          <mesh>
++            <uri>meshes/base_link.stl</uri>
++            <scale>0.001 0.001 0.001</scale>
++          </mesh>
++        </geometry>
++      </collision>
++    </link>
++
++    <!-- WHEELS -->
++
++    <!-- FRONT LEFT -->
++<link name="front_left_wheel">
++
++  <!-- Position taken from old working chassis -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial from URDF -->
++  <inertial>
++    <!-- <pose>-2.1897287448918723e-05 -0.023738528231967565 3.1378817485983033e-06 0 0 0</pose> -->
++    <mass>0.30282113324994747</mass>
++    <inertia>
++      <ixx>0.00016</ixx>
++      <iyy>0.000181</iyy>
++      <izz>0.000158</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <!-- <pose>-0.125 -0.15 0 0 0 0</pose> -->
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_FL_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <!-- <pose>-0.125 -0.15 0 0 0 0</pose> -->
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_FL_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Friction model copied from working mecanum -->
++
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++
++  </collision>
++
++</link>
++
++<link name="roller_14_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_14_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_14_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_16_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_16_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_16_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_13_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_13_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_13_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++<link name="roller_12_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_12_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_12_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++<link name="roller_15_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_15_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_15_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++<link name="roller_17_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_17_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_17_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++<link name="roller_18_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_18_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_18_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++<link name="roller_10_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_10_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_10_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++<link name="roller_11_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_11_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_11_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++
++
++    <!-- FRONT RIGHT -->
++<link name="front_right_wheel">
++
++  <!-- Same reference height as your final wheel -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF, unchanged) -->
++  <inertial>
++    <mass>0.30282113324994747</mass>
++    <inertia>
++      <ixx>0.00016</ixx>
++      <iyy>0.000181</iyy>
++      <izz>0.000158</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_FR_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_FR_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction as your final definition -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++
++  </collision>
++
++</link>
++
++<link name="roller_7_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_7_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_7_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_5_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_5_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_5_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_3_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_3_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_3_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_6_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_6_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_6_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_8_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_8_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_8_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_9_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_9_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_9_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_4_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_4_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_4_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_1_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_1_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_1_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_2_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_2_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_2_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++    <!-- REAR LEFT -->
++ <link name="rear_left_wheel">
++
++  <!-- Same reference height as other wheels -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (unchanged from URDF) -->
++  <inertial>
++    <mass>0.30282113324994536</mass>
++    <inertia>
++      <ixx>0.000161</ixx>
++      <iyy>0.000183</iyy>
++      <izz>0.000161</izz>
++      <ixy>-0.0</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_BL_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_BL_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++
++  </collision>
++
++</link>
++
++<link name="roller_23_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_23_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_23_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_22_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_22_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_22_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_25_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_25_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_25_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_21_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_21_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_21_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_26_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_26_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_26_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_27_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_27_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_27_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_20_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_20_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_20_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_19_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_19_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_19_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_24_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_24_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_24_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++<link name="roller_34_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_34_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_34_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++    <!-- REAR RIGHT -->
++<link name="rear_right_wheel">
++
++  <!-- Same reference height as the other wheels -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF, unchanged) -->
++  <inertial>
++    <mass>0.30282113324994864</mass>
++    <inertia>
++      <ixx>0.00016</ixx>
++      <iyy>0.000183</iyy>
++      <izz>0.00016</izz>
++      <ixy>0.0</ixy>
++      <iyz>0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_BR_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/wheel_frame_BR_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++
++  </collision>
++
++</link>
++
++<link name="roller_30_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_30_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_30_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_32_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_32_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_32_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_31_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_31_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_31_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_29_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_29_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_29_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_28_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_28_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_28_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_35_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_35_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_35_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_36_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_36_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_36_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++<link name="roller_33_1">
++
++  <!-- Keep all rollers consistent with wheel reference frame -->
++  <pose>0 0 0.05 0 0 0</pose>
++
++  <!-- Inertial (from URDF) -->
++  <inertial>
++    <mass>0.014233736590697255</mass>
++    <inertia>
++      <ixx>2e-06</ixx>
++      <iyy>2e-06</iyy>
++      <izz>2e-06</izz>
++      <ixy>-1e-06</ixy>
++      <iyz>-0.0</iyz>
++      <ixz>-0.0</ixz>
++    </inertia>
++  </inertial>
++
++  <!-- Visual -->
++  <visual name="visual">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_33_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same silver as wheels -->
++    <material>
++      <ambient>0.75 0.75 0.75 1</ambient>
++      <diffuse>0.85 0.85 0.85 1</diffuse>
++      <specular>0.9 0.9 0.9 1</specular>
++    </material>
++  </visual>
++
++  <!-- Collision -->
++  <collision name="collision">
++    <geometry>
++      <mesh>
++        <uri>meshes/roller_33_1.stl</uri>
++        <scale>0.001 0.001 0.001</scale>
++      </mesh>
++    </geometry>
++
++    <!-- Same friction model -->
++    <surface>
++      <friction>
++        <ode>
++          <mu>0.2</mu>
++          <mu2>0.2</mu2>
++        </ode>
++      </friction>
++    </surface>
++  </collision>
++
++</link>
++
++
++    <!-- JOINTS -->
++
++    <joint name="front_left_wheel_joint" type="revolute">
++      <parent>chassis</parent>
++      <child>front_left_wheel</child>
++      <axis>
++        <xyz>0 1 0</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_14_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_14_1</child>
++      <axis>
++        <xyz>0.720551 0.693402 0</xyz>
++      </axis>
++      <limit>
++        <lower>-1e16</lower>
++        <upper>1e16</upper>
++      </limit>
++    </joint>
++
++    <joint name="roller_16_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_16_1</child>
++      <axis>
++        <xyz>0.551974 0.693402 -0.463161</xyz>
++      </axis>
++      <limit>
++        <lower>-1e16</lower>
++        <upper>1e16</upper>
++      </limit>
++    </joint>
++
++    <joint name="roller_13_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_13_1</child>
++
++      <axis>
++        <xyz>-0.125122 -0.693402 0.709604</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_12_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_12_1</child>
++
++      <axis>
++        <xyz>0.360276 -0.693402 0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_15_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_15_1</child>
++
++      <axis>
++        <xyz>0.677097 -0.693402 0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_17_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_17_1</child>
++
++      <axis>
++        <xyz>0.677097 -0.693402 -0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_18_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_18_1</child>
++
++      <axis>
++        <xyz>0.360276 -0.693402 -0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_10_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_10_1</child>
++
++      <axis>
++        <xyz>-0.125122 -0.693402 -0.709604</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_11_joint" type="revolute">
++      <parent>front_left_wheel</parent>
++      <child>roller_11_1</child>
++
++      <axis>
++        <xyz>-0.551974 -0.693402 -0.463161</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="front_right_wheel_joint" type="revolute">
++      <parent>chassis</parent>
++      <child>front_right_wheel</child>
++      <axis>
++        <xyz>0 1 0</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_7_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_7_1</child>
++      <axis>
++        <xyz>0.720551 -0.693402 0</xyz>
++      </axis>
++      <limit>
++        <lower>-1e16</lower>
++        <upper>1e16</upper>
++      </limit>
++    </joint>
++
++    <joint name="roller_5_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_5_1</child>
++      <axis>
++        <xyz>0.551974 -0.693402 -0.463161</xyz>
++      </axis>
++      <limit>
++        <lower>-1e16</lower>
++        <upper>1e16</upper>
++      </limit>
++    </joint>
++
++    <joint name="roller_3_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_3_1</child>
++
++      <axis>
++        <xyz>0.125122 -0.693402 -0.709604</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_6_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_6_1</child>
++
++      <axis>
++        <xyz>-0.360276 -0.693402 -0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_8_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_8_1</child>
++
++      <axis>
++        <xyz>-0.677097 -0.693402 -0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_9_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_9_1</child>
++
++      <axis>
++        <xyz>-0.677097 -0.693402 0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_4_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_4_1</child>
++
++      <axis>
++        <xyz>-0.360276 -0.693402 0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_1_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_1_1</child>
++
++      <axis>
++        <xyz>0.125122 -0.693402 0.709604</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_2_joint" type="revolute">
++      <parent>front_right_wheel</parent>
++      <child>roller_2_1</child>
++
++      <axis>
++        <xyz>0.551974 -0.693402 0.463161</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="rear_left_wheel_joint" type="revolute">
++      <parent>chassis</parent>
++      <child>rear_left_wheel</child>
++      <axis>
++        <xyz>0 1 0</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_23_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_23_1</child>
++
++      <axis>
++        <xyz>0.720551 -0.693402 0</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_22_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_22_1</child>
++
++      <axis>
++        <xyz>0.551974 -0.693402 -0.463161</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_25_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_25_1</child>
++
++      <axis>
++        <xyz>0.125122 -0.693402 -0.709604</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_21_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_21_1</child>
++
++      <axis>
++        <xyz>-0.360276 -0.693402 -0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_26_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_26_1</child>
++
++      <axis>
++        <xyz>-0.677097 -0.693402 -0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_27_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_27_1</child>
++
++      <axis>
++        <xyz>-0.677097 -0.693402 0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_20_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_20_1</child>
++
++      <axis>
++        <xyz>-0.360276 -0.693402 0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_19_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_19_1</child>
++
++      <axis>
++        <xyz>0.125122 -0.693402 0.709604</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++    <joint name="roller_24_joint" type="revolute">
++      <parent>rear_left_wheel</parent>
++      <child>roller_24_1</child>
++
++      <axis>
++        <xyz>0.551974 -0.693402 0.463161</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++      </axis>
++    </joint>
++
++
++    <joint name="rear_right_wheel_joint" type="revolute">
++      <parent>chassis</parent>
++      <child>rear_right_wheel</child>
++      <axis>
++        <xyz>0 1 0</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_34_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_34_1</child>
++
++      <axis>
++        <xyz>0.720551 0.693402 0</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_30_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_30_1</child>
++
++      <axis>
++        <xyz>0.551974 0.693402 -0.463161</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_32_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_32_1</child>
++
++      <axis>
++        <xyz>0.125122 0.693402 -0.709604</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_31_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_31_1</child>
++
++      <axis>
++        <xyz>-0.360276 0.693402 -0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_29_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_29_1</child>
++
++      <axis>
++        <xyz>-0.677097 0.693402 -0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_28_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_28_1</child>
++
++      <axis>
++        <xyz>0.551974 0.693402 0.463161</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_35_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_35_1</child>
++
++      <axis>
++        <xyz>-0.677097 0.693402 0.246443</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_36_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_36_1</child>
++
++      <axis>
++        <xyz>-0.360276 0.693402 0.624016</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <joint name="roller_33_joint" type="revolute">
++      <parent>rear_right_wheel</parent>
++      <child>roller_33_1</child>
++
++      <axis>
++        <xyz>-0.036391 0.040414 0.023967</xyz>
++        <limit>
++          <lower>-1e16</lower>
++          <upper>1e16</upper>
++        </limit>
++        <dynamics>
++          <friction>0.0</friction>
++          <damping>0.0</damping>
++        </dynamics>
++      </axis>
++    </joint>
++
++    <!-- JOINT VELOCITY CONTROLLERS -->
++
++    <plugin
++      filename="libignition-gazebo-mecanum-drive-system.so"
++      name="ignition::gazebo::systems::MecanumDrive">
++      <front_right_joint>front_right_wheel_joint</front_right_joint>
++      <front_left_joint>front_left_wheel_joint</front_left_joint>
++      <back_left_joint>rear_left_wheel_joint</back_left_joint>
++      <back_right_joint>rear_right_wheel_joint</back_right_joint>
++
++      <wheelbase>0.207</wheelbase> <!-- dist wheel front to back -->
++      <wheel_separation>0.153</wheel_separation>  <!-- dist wheel left to right -->
++      <wheel_radius>0.04</wheel_radius>
++
++      <odom_publish_frequency>50</odom_publish_frequency>
++      <publish_odom>true</publish_odom>
++      <odom_topic>/odometry</odom_topic>
++      <tf_topic>/tf</tf_topic>
++      <frame_id>odom</frame_id>
++      <child_frame_id>chassis</child_frame_id>
++
++      <topic>/model/simple_robot/cmd_vel</topic>
++    </plugin>
++
++
++  </model>
++</sdf>
+diff --git a/mam_eurobot_2026/models/simple_robot/urdf/materials.xacro b/mam_eurobot_2026/models/simple_robot/urdf/materials.xacro
+new file mode 100644
+index 0000000..0f666ab
+--- /dev/null
++++ b/mam_eurobot_2026/models/simple_robot/urdf/materials.xacro
+@@ -0,0 +1,8 @@
++<?xml version="1.0" ?>
++<robot name="omni_like_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
++
++<material name="silver">
++  <color rgba="0.700 0.700 0.700 1.000"/>
++</material>
++
++</robot>
+diff --git a/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.gazebo b/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.gazebo
+new file mode 100644
+index 0000000..e2a6d76
+--- /dev/null
++++ b/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.gazebo
+@@ -0,0 +1,325 @@
++<?xml version="1.0" ?>
++<robot name="omni_like_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
++
++<xacro:property name="body_color" value="Gazebo/Silver" />
++<xacro:property name="roller_color" value="Gazebo/Orange" />
++<xacro:property name="wheel_color" value="Gazebo/Grey" />
++
++
++<gazebo>
++  <plugin name="control" filename="libgazebo_ros_control.so"/>
++</gazebo>
++<gazebo reference="base_link">
++  <material>${body_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++  <gravity>true</gravity>
++</gazebo>
++
++<gazebo reference="wheel_frame_FL_1">
++  <material>${wheel_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_14_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_16_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_13_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_12_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_15_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_17_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_18_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_10_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_11_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="wheel_frame_FR_1">
++  <material>${wheel_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_7_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_5_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_3_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_6_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_8_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_9_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_4_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_1_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_2_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="wheel_frame_BL_1">
++  <material>${wheel_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_23_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_22_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_25_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_21_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_26_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_27_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_20_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_19_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_24_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="wheel_frame_BR_1">
++  <material>${wheel_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_34_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_30_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_32_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_31_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_29_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_28_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_35_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_36_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo reference="roller_33_1">
++  <material>${roller_color}</material>
++  <mu1>0.2</mu1>
++  <mu2>0.2</mu2>
++  <selfCollide>true</selfCollide>
++</gazebo>
++
++<gazebo>
++      <plugin name="gazebo_ros_mecanum_diff_drive" filename="libgazebo_ros_mecanum_drive.so">
++        <commandTopic>cmd_vel</commandTopic>
++        <odometryTopic>odom</odometryTopic>
++        <odometryFrame>odom</odometryFrame>
++        <robotBaseFrame>base_link</robotBaseFrame>
++        <LeftRear>back_left_joint</LeftRear>
++        <LeftFront>front_left_joint</LeftFront>
++        <RightFront>front_right_joint</RightFront>
++        <RightRear>back_right_joint</RightRear>
++        <odometryRate>20</odometryRate>      
++        <publishWheelTF>true</publishWheelTF>
++        <publishWheelJointState>true</publishWheelJointState>
++        <WheelTorque>1</WheelTorque>
++        <WheelSeparationW>0.25</WheelSeparationW>
++        <WheelSeparationL>0.25</WheelSeparationL>
++        <wheelAccel>5</wheelAccel>
++        <wheelDiameter>0.1</wheelDiameter>
++        <publishOdom>false</publishOdom>
++        <isRollerModel>true</isRollerModel>
++      </plugin>
++</gazebo>
++
++
++
++</robot>
+diff --git a/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.trans b/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.trans
+new file mode 100644
+index 0000000..ee6dba1
+--- /dev/null
++++ b/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.trans
+@@ -0,0 +1,444 @@
++<?xml version="1.0" ?>
++<robot name="omni_like_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
++
++<transmission name="front_left_joint_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="front_left_joint">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="front_left_joint_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_57_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_57">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_57_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_58_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_58">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_58_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_59_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_59">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_59_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_60_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_60">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_60_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_61_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_61">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_61_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_62_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_62">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_62_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_63_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_63">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_63_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_64_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_64">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_64_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_65_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_65">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_65_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="front_right_joint_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="front_right_joint">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="front_right_joint_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_67_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_67">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_67_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_68_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_68">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_68_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_69_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_69">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_69_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_70_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_70">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_70_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_71_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_71">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_71_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_72_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_72">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_72_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_73_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_73">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_73_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_74_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_74">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_74_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_75_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_75">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_75_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="back_left_joint_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="back_left_joint">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="back_left_joint_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_77_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_77">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_77_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_78_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_78">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_78_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_79_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_79">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_79_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_80_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_80">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_80_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_81_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_81">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_81_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_82_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_82">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_82_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_83_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_83">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_83_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_84_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_84">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_84_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_85_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_85">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_85_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="back_right_joint_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="back_right_joint">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="back_right_joint_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_87_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_87">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_87_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_88_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_88">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_88_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_89_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_89">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_89_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_90_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_90">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_90_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_91_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_91">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_91_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_92_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_92">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_92_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_93_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_93">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_93_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_94_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_94">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_94_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++<transmission name="Revolute_95_tran">
++  <type>transmission_interface/SimpleTransmission</type>
++  <joint name="Revolute_95">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++  </joint>
++  <actuator name="Revolute_95_actr">
++    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
++    <mechanicalReduction>1</mechanicalReduction>
++  </actuator>
++</transmission>
++
++</robot>
+diff --git a/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.xacro b/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.xacro
+new file mode 100644
+index 0000000..749665b
+--- /dev/null
++++ b/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.xacro
+@@ -0,0 +1,1148 @@
++<?xml version="1.0" ?>
++<robot name="omni_like_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
++
++<xacro:include filename="/home/rosdev/eurobot_2026_ws/src/mam_eurobot_2026/models/simple_robot/urdf/materials.xacro" />
++<xacro:include filename="/home/rosdev/eurobot_2026_ws/src/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.trans" />
++<xacro:include filename="/home/rosdev/eurobot_2026_ws/src/mam_eurobot_2026/models/simple_robot/urdf/mec_rob.gazebo" />
++<link name="base_link">
++  <inertial>
++    <origin xyz="6.760415092149816e-05 -2.9513096198865094e-17 2.0788276408363705e-05" rpy="0 0 0"/>
++    <mass value="19.3528550466136"/>
++    <inertia ixx="0.07315" iyy="0.151641" izz="0.219727" ixy="-0.0" iyz="0.0" ixz="-2.7e-05"/>
++  </inertial>
++  <visual>
++    <origin xyz="0 0 0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0 0 0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="wheel_frame_FL_1">
++  <inertial>
++    <origin xyz="-2.1897287448918723e-05 -0.023738528231967565 3.1378817485983033e-06" rpy="0 0 0"/>
++    <mass value="0.30282113324994747"/>
++    <inertia ixx="0.00016" iyy="0.000181" izz="0.000158" ixy="-1e-06" iyz="0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.125 -0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_FL_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.125 -0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_FL_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_14_1">
++  <inertial>
++    <origin xyz="-0.01730009422242043 -0.01664777121912278 -2.6367796834847468e-15" rpy="0 0 0"/>
++    <mass value="0.014233736590697255"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-1e-06" iyz="-0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.142316 -0.142881 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_14_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.142316 -0.142881 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_14_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_16_1">
++  <inertial>
++    <origin xyz="-0.01325231160541368 -0.01664777187914801 0.011119554128877593" rpy="0 0 0"/>
++    <mass value="0.01423373659069693"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.163976 -0.142881 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_16_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.163976 -0.142881 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_16_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_13_1">
++  <inertial>
++    <origin xyz="-0.0030044941161637972 -0.016647462795977563 0.01703683072301009" rpy="0 0 0"/>
++    <mass value="0.014233736590696914"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.167394 -0.142914 0.010075" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_13_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.167394 -0.142914 0.010075" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_13_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_12_1">
++  <inertial>
++    <origin xyz="0.008650090286065698 -0.016647462135951696 0.01498198481151108" rpy="0 0 0"/>
++    <mass value="0.01423373659069688"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.150999 -0.142914 0.034968" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_12_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.150999 -0.142914 0.034968" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_12_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_15_1">
++  <inertial>
++    <origin xyz="0.016255980142600823 -0.016647462135952473 0.005916818201972901" rpy="0 0 0"/>
++    <mass value="0.014233736590697089"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.12244 -0.142914 0.043499" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_15_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.12244 -0.142914 0.043499" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_15_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_17_1">
++  <inertial>
++    <origin xyz="0.01625636867654784 -0.016647462135950142 -0.005917227864846754" rpy="0 0 0"/>
++    <mass value="0.014233736590697006"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="-0.0" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.095078 -0.142914 0.031676" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_17_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.095078 -0.142914 0.031676" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_17_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_18_1">
++  <inertial>
++    <origin xyz="0.008650058329703877 -0.016647462793830475 -0.014981985403539554" rpy="0 0 0"/>
++    <mass value="0.01423373659069696"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="-1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.081717 -0.142914 0.005032" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_18_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.081717 -0.142914 0.005032" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_18_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_10_1">
++  <inertial>
++    <origin xyz="-0.0030041143571402362 -0.016647462795977036 -0.017036976509655844" rpy="0 0 0"/>
++    <mass value="0.014233736590696993"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="-1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.088609 -0.142914 -0.023967" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_10_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.088609 -0.142914 -0.023967" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_10_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_11_1">
++  <inertial>
++    <origin xyz="-0.013251875204888214 -0.016647462795978424 -0.011119602623583382" rpy="0 0 0"/>
++    <mass value="0.014233736590697477"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-1e-06" iyz="-1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.112528 -0.142914 -0.041751" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_11_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.112528 -0.142914 -0.041751" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_11_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="wheel_frame_FR_1">
++  <inertial>
++    <origin xyz="-2.1897287449737513e-05 0.02375019110552612 3.1378817487137666e-06" rpy="0 0 0"/>
++    <mass value="0.30282113324994836"/>
++    <inertia ixx="0.000161" iyy="0.000181" izz="0.000159" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.125 0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_FR_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.125 0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_FR_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_7_1">
++  <inertial>
++    <origin xyz="0.017300094908289848 -0.01664777187914701 -1.2073675392798577e-15" rpy="0 0 0"/>
++    <mass value="0.014233736590697038"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="-0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.107684 0.109619 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_7_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.107684 0.109619 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_7_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_5_1">
++  <inertial>
++    <origin xyz="0.013252319854933331 -0.016647771219124002 -0.011119998238488766" rpy="0 0 0"/>
++    <mass value="0.01423373659069685"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="-1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.137447 0.109619 -0.041772" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_5_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.137447 0.109619 -0.041772" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_5_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_3_1">
++  <inertial>
++    <origin xyz="0.00300454811119516 -0.01664777121912328 -0.017036408760246494" rpy="0 0 0"/>
++    <mass value="0.014233736590696551"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="-1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.161385 0.109619 -0.023998" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_3_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.161385 0.109619 -0.023998" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_3_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_6_1">
++  <inertial>
++    <origin xyz="-0.008650030959834937 -0.016647771219122087 -0.0149822251925512" rpy="0 0 0"/>
++    <mass value="0.014233736590697"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="-1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.168299 0.109619 0.005004" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_6_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.168299 0.109619 0.005004" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_6_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_8_1">
++  <inertial>
++    <origin xyz="-0.01625624772515452 -0.016647771219123614 -0.005917264735106481" rpy="0 0 0"/>
++    <mass value="0.01423373659069701"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-1e-06" iyz="-0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.154952 0.109619 0.031665" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_8_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.154952 0.109619 0.031665" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_8_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_9_1">
++  <inertial>
++    <origin xyz="-0.01625685983158369 -0.01664777188086597 0.005916855307413364" rpy="0 0 0"/>
++    <mass value="0.014233736590696988"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-1e-06" iyz="0.0" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.127591 0.109619 0.04351" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_9_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.127591 0.109619 0.04351" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_9_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_4_1">
++  <inertial>
++    <origin xyz="-0.008650063605525643 -0.016647771879150397 0.014982225786529486" rpy="0 0 0"/>
++    <mass value="0.01423373659069714"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.099017 0.109619 0.034996" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_4_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.099017 0.109619 0.034996" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_4_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_1_1">
++  <inertial>
++    <origin xyz="0.003003927989318908 -0.01664777187914948 0.017037263649050942" rpy="0 0 0"/>
++    <mass value="0.014233736590697087"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.082601 0.109619 0.010107" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_1_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.082601 0.109619 0.010107" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_1_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_2_1">
++  <inertial>
++    <origin xyz="0.013252311605417427 -0.016647771879147594 0.011119554128875348" rpy="0 0 0"/>
++    <mass value="0.014233736590697151"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="-0.086024 0.109619 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_2_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="-0.086024 0.109619 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_2_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="wheel_frame_BL_1">
++  <inertial>
++    <origin xyz="3.1733464467276207e-10 -0.023749808894473867 -7.519251293838056e-14" rpy="0 0 0"/>
++    <mass value="0.30282113324994536"/>
++    <inertia ixx="0.000161" iyy="0.000183" izz="0.000161" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.125 -0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_BL_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.125 -0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_BL_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_23_1">
++  <inertial>
++    <origin xyz="0.017300094222420792 -0.016647771219122837 2.5049406993105094e-15" rpy="0 0 0"/>
++    <mass value="0.014233736590696983"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="-0.0" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.142316 -0.142881 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_23_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.142316 -0.142881 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_23_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_22_1">
++  <inertial>
++    <origin xyz="0.013252320380338786 -0.016647771879150813 -0.011119998679360706" rpy="0 0 0"/>
++    <mass value="0.014233736590697042"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.112553 -0.142881 -0.041772" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_22_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.112553 -0.142881 -0.041772" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_22_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_25_1">
++  <inertial>
++    <origin xyz="0.003004548230298998 -0.016647771879146955 -0.01703640943569361" rpy="0 0 0"/>
++    <mass value="0.014233736590697047"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="-1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.088615 -0.142881 -0.023998" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_25_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.088615 -0.142881 -0.023998" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_25_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_21_1">
++  <inertial>
++    <origin xyz="-0.008650030959835658 -0.016647771219122615 -0.014982225192550146" rpy="0 0 0"/>
++    <mass value="0.014233736590696936"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="-1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.081701 -0.142881 0.005004" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_21_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.081701 -0.142881 0.005004" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_21_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_26_1">
++  <inertial>
++    <origin xyz="-0.016256248369660345 -0.016647771879147844 -0.005917264969692589" rpy="0 0 0"/>
++    <mass value="0.014233736590697033"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-1e-06" iyz="-0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.095048 -0.142881 0.031665" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_26_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.095048 -0.142881 0.031665" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_26_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_27_1">
++  <inertial>
++    <origin xyz="-0.01625685918905319 -0.016647771222854157 0.005916855073576734" rpy="0 0 0"/>
++    <mass value="0.014233736590697002"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-1e-06" iyz="0.0" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.122409 -0.142881 0.04351" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_27_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.122409 -0.142881 0.04351" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_27_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_20_1">
++  <inertial>
++    <origin xyz="-0.008650063605519703 -0.016647771879149093 0.01498222578652882" rpy="0 0 0"/>
++    <mass value="0.014233736590696985"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.150983 -0.142881 0.034996" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_20_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.150983 -0.142881 0.034996" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_20_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_19_1">
++  <inertial>
++    <origin xyz="0.0030039278702186645 -0.01664777121912278 0.017037262973597655" rpy="0 0 0"/>
++    <mass value="0.014233736590697066"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.167399 -0.142881 0.010107" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_19_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.167399 -0.142881 0.010107" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_19_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_24_1">
++  <inertial>
++    <origin xyz="0.0132523116054169 -0.016647771879146317 0.011119554128877464" rpy="0 0 0"/>
++    <mass value="0.014233736590697"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.163976 -0.142881 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_24_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.163976 -0.142881 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_24_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="wheel_frame_BR_1">
++  <inertial>
++    <origin xyz="3.1733479732842795e-10 0.023761471768032644 -7.514689871510898e-14" rpy="0 0 0"/>
++    <mass value="0.30282113324994864"/>
++    <inertia ixx="0.00016" iyy="0.000183" izz="0.00016" ixy="0.0" iyz="0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.125 0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_BR_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.125 0.15 -0.0" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/wheel_frame_BR_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_34_1">
++  <inertial>
++    <origin xyz="-0.01730009422242071 -0.016647771219125196 -1.0685896612017132e-15" rpy="0 0 0"/>
++    <mass value="0.014233736590696927"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-1e-06" iyz="0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.107684 0.109619 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_34_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.107684 0.109619 -0.04" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_34_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_30_1">
++  <inertial>
++    <origin xyz="-0.013252311605417719 -0.016647771879147177 0.011119554128875175" rpy="0 0 0"/>
++    <mass value="0.014233736590697087"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.086024 0.109619 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_30_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.086024 0.109619 -0.019512" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_30_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_32_1">
++  <inertial>
++    <origin xyz="-0.0030039279893207677 -0.01664777187914715 0.017037263649050297" rpy="0 0 0"/>
++    <mass value="0.014233736590697054"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.082601 0.109619 0.010107" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_32_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.082601 0.109619 0.010107" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_32_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_31_1">
++  <inertial>
++    <origin xyz="0.008650063262586508 -0.01664777121912009 0.014982225192549992" rpy="0 0 0"/>
++    <mass value="0.01423373659069689"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.099017 0.109619 0.034996" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_31_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.099017 0.109619 0.034996" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_31_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_29_1">
++  <inertial>
++    <origin xyz="0.016256859835714538 -0.016647771879146372 0.0059168553068168275" rpy="0 0 0"/>
++    <mass value="0.014233736590697115"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="0.0" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.127591 0.109619 0.04351" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_29_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.127591 0.109619 0.04351" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_29_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_28_1">
++  <inertial>
++    <origin xyz="-0.013252320380341881 -0.016647771879148177 -0.011119998679359859" rpy="0 0 0"/>
++    <mass value="0.014233736590697"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.137447 0.109619 -0.041772" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_28_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.137447 0.109619 -0.041772" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_28_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_35_1">
++  <inertial>
++    <origin xyz="0.01625624772515405 -0.01664777121912206 -0.005917264735111838" rpy="0 0 0"/>
++    <mass value="0.01423373659069706"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="1e-06" iyz="-0.0" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.154952 0.109619 0.031665" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_35_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.154952 0.109619 0.031665" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_35_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_36_1">
++  <inertial>
++    <origin xyz="0.00865003096434197 -0.016647771218981755 -0.01498222519244071" rpy="0 0 0"/>
++    <mass value="0.014233736590696964"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="0.0" iyz="-1e-06" ixz="0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.168299 0.109619 0.005004" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_36_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.168299 0.109619 0.005004" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_36_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<link name="roller_33_1">
++  <inertial>
++    <origin xyz="-0.003004114238040423 -0.01664746213595243 -0.017036975834204805" rpy="0 0 0"/>
++    <mass value="0.01423373659069702"/>
++    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="-1e-06" ixz="-0.0"/>
++  </inertial>
++  <visual>
++    <origin xyz="0.161391 0.109586 -0.023967" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_33_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++    <material name="silver"/>
++  </visual>
++  <collision>
++    <origin xyz="0.161391 0.109586 -0.023967" rpy="0 0 0"/>
++    <geometry>
++      <mesh filename="package://mam_eurobot_2026/simple_robot/meshes/roller_33_1.stl" scale="0.001 0.001 0.001"/>
++    </geometry>
++  </collision>
++</link>
++
++<joint name="front_left_joint" type="continuous">
++  <origin xyz="0.125 0.15 0.0" rpy="0 0 0"/>
++  <parent link="base_link"/>
++  <child link="wheel_frame_FL_1"/>
++  <axis xyz="0.0 1.0 0.0"/>
++</joint>
++
++<joint name="Revolute_57" type="continuous">
++  <origin xyz="0.017316 -0.007119 0.04" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_14_1"/>
++  <axis xyz="0.720551 0.693402 -0.0"/>
++</joint>
++
++<joint name="Revolute_58" type="continuous">
++  <origin xyz="0.038976 -0.007119 0.019512" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_16_1"/>
++  <axis xyz="0.551974 0.693402 -0.463161"/>
++</joint>
++
++<joint name="Revolute_59" type="continuous">
++  <origin xyz="0.042394 -0.007086 -0.010075" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_13_1"/>
++  <axis xyz="-0.125122 -0.693402 0.709604"/>
++</joint>
++
++<joint name="Revolute_60" type="continuous">
++  <origin xyz="0.025999 -0.007086 -0.034968" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_12_1"/>
++  <axis xyz="0.360276 -0.693402 0.624016"/>
++</joint>
++
++<joint name="Revolute_61" type="continuous">
++  <origin xyz="-0.00256 -0.007086 -0.043499" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_15_1"/>
++  <axis xyz="0.677097 -0.693402 0.246443"/>
++</joint>
++
++<joint name="Revolute_62" type="continuous">
++  <origin xyz="-0.029922 -0.007086 -0.031676" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_17_1"/>
++  <axis xyz="0.677097 -0.693402 -0.246443"/>
++</joint>
++
++<joint name="Revolute_63" type="continuous">
++  <origin xyz="-0.043283 -0.007086 -0.005032" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_18_1"/>
++  <axis xyz="0.360276 -0.693402 -0.624016"/>
++</joint>
++
++<joint name="Revolute_64" type="continuous">
++  <origin xyz="-0.036391 -0.007086 0.023967" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_10_1"/>
++  <axis xyz="-0.125122 -0.693402 -0.709604"/>
++</joint>
++
++<joint name="Revolute_65" type="continuous">
++  <origin xyz="-0.012472 -0.007086 0.041751" rpy="0 0 0"/>
++  <parent link="wheel_frame_FL_1"/>
++  <child link="roller_11_1"/>
++  <axis xyz="-0.551974 -0.693402 -0.463161"/>
++</joint>
++
++<joint name="front_right_joint" type="continuous">
++  <origin xyz="0.125 -0.15 0.0" rpy="0 0 0"/>
++  <parent link="base_link"/>
++  <child link="wheel_frame_FR_1"/>
++  <axis xyz="0.0 1.0 0.0"/>
++</joint>
++
++<joint name="Revolute_67" type="continuous">
++  <origin xyz="-0.017316 0.040381 0.04" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_7_1"/>
++  <axis xyz="0.720551 -0.693402 -0.0"/>
++</joint>
++
++<joint name="Revolute_68" type="continuous">
++  <origin xyz="0.012447 0.040381 0.041772" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_5_1"/>
++  <axis xyz="0.551974 -0.693402 -0.463161"/>
++</joint>
++
++<joint name="Revolute_69" type="continuous">
++  <origin xyz="0.036385 0.040381 0.023998" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_3_1"/>
++  <axis xyz="0.125122 -0.693402 -0.709604"/>
++</joint>
++
++<joint name="Revolute_70" type="continuous">
++  <origin xyz="0.043299 0.040381 -0.005004" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_6_1"/>
++  <axis xyz="-0.360276 -0.693402 -0.624016"/>
++</joint>
++
++<joint name="Revolute_71" type="continuous">
++  <origin xyz="0.029952 0.040381 -0.031665" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_8_1"/>
++  <axis xyz="-0.677097 -0.693402 -0.246443"/>
++</joint>
++
++<joint name="Revolute_72" type="continuous">
++  <origin xyz="0.002591 0.040381 -0.04351" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_9_1"/>
++  <axis xyz="-0.677097 -0.693402 0.246443"/>
++</joint>
++
++<joint name="Revolute_73" type="continuous">
++  <origin xyz="-0.025983 0.040381 -0.034996" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_4_1"/>
++  <axis xyz="-0.360276 -0.693402 0.624016"/>
++</joint>
++
++<joint name="Revolute_74" type="continuous">
++  <origin xyz="-0.042399 0.040381 -0.010107" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_1_1"/>
++  <axis xyz="0.125122 -0.693402 0.709604"/>
++</joint>
++
++<joint name="Revolute_75" type="continuous">
++  <origin xyz="-0.038976 0.040381 0.019512" rpy="0 0 0"/>
++  <parent link="wheel_frame_FR_1"/>
++  <child link="roller_2_1"/>
++  <axis xyz="0.551974 -0.693402 0.463161"/>
++</joint>
++
++<joint name="back_left_joint" type="continuous">
++  <origin xyz="-0.125 0.15 0.0" rpy="0 0 0"/>
++  <parent link="base_link"/>
++  <child link="wheel_frame_BL_1"/>
++  <axis xyz="0.0 1.0 0.0"/>
++</joint>
++
++<joint name="Revolute_77" type="continuous">
++  <origin xyz="-0.017316 -0.007119 0.04" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_23_1"/>
++  <axis xyz="0.720551 -0.693402 -0.0"/>
++</joint>
++
++<joint name="Revolute_78" type="continuous">
++  <origin xyz="0.012447 -0.007119 0.041772" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_22_1"/>
++  <axis xyz="0.551974 -0.693402 -0.463161"/>
++</joint>
++
++<joint name="Revolute_79" type="continuous">
++  <origin xyz="0.036385 -0.007119 0.023998" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_25_1"/>
++  <axis xyz="0.125122 -0.693402 -0.709604"/>
++</joint>
++
++<joint name="Revolute_80" type="continuous">
++  <origin xyz="0.043299 -0.007119 -0.005004" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_21_1"/>
++  <axis xyz="-0.360276 -0.693402 -0.624016"/>
++</joint>
++
++<joint name="Revolute_81" type="continuous">
++  <origin xyz="0.029952 -0.007119 -0.031665" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_26_1"/>
++  <axis xyz="-0.677097 -0.693402 -0.246443"/>
++</joint>
++
++<joint name="Revolute_82" type="continuous">
++  <origin xyz="0.002591 -0.007119 -0.04351" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_27_1"/>
++  <axis xyz="-0.677097 -0.693402 0.246443"/>
++</joint>
++
++<joint name="Revolute_83" type="continuous">
++  <origin xyz="-0.025983 -0.007119 -0.034996" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_20_1"/>
++  <axis xyz="-0.360276 -0.693402 0.624016"/>
++</joint>
++
++<joint name="Revolute_84" type="continuous">
++  <origin xyz="-0.042399 -0.007119 -0.010107" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_19_1"/>
++  <axis xyz="0.125122 -0.693402 0.709604"/>
++</joint>
++
++<joint name="Revolute_85" type="continuous">
++  <origin xyz="-0.038976 -0.007119 0.019512" rpy="0 0 0"/>
++  <parent link="wheel_frame_BL_1"/>
++  <child link="roller_24_1"/>
++  <axis xyz="0.551974 -0.693402 0.463161"/>
++</joint>
++
++<joint name="back_right_joint" type="continuous">
++  <origin xyz="-0.125 -0.15 0.0" rpy="0 0 0"/>
++  <parent link="base_link"/>
++  <child link="wheel_frame_BR_1"/>
++  <axis xyz="0.0 1.0 0.0"/>
++</joint>
++
++<joint name="Revolute_87" type="continuous">
++  <origin xyz="0.017316 0.040381 0.04" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_34_1"/>
++  <axis xyz="0.720551 0.693402 -0.0"/>
++</joint>
++
++<joint name="Revolute_88" type="continuous">
++  <origin xyz="0.038976 0.040381 0.019512" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_30_1"/>
++  <axis xyz="0.551974 0.693402 -0.463161"/>
++</joint>
++
++<joint name="Revolute_89" type="continuous">
++  <origin xyz="0.042399 0.040381 -0.010107" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_32_1"/>
++  <axis xyz="0.125122 0.693402 -0.709604"/>
++</joint>
++
++<joint name="Revolute_90" type="continuous">
++  <origin xyz="0.025983 0.040381 -0.034996" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_31_1"/>
++  <axis xyz="-0.360276 0.693402 -0.624016"/>
++</joint>
++
++<joint name="Revolute_91" type="continuous">
++  <origin xyz="-0.002591 0.040381 -0.04351" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_29_1"/>
++  <axis xyz="-0.677097 0.693402 -0.246443"/>
++</joint>
++
++<joint name="Revolute_92" type="continuous">
++  <origin xyz="-0.012447 0.040381 0.041772" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_28_1"/>
++  <axis xyz="0.551974 0.693402 0.463161"/>
++</joint>
++
++<joint name="Revolute_93" type="continuous">
++  <origin xyz="-0.029952 0.040381 -0.031665" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_35_1"/>
++  <axis xyz="-0.677097 0.693402 0.246443"/>
++</joint>
++
++<joint name="Revolute_94" type="continuous">
++  <origin xyz="-0.043299 0.040381 -0.005004" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_36_1"/>
++  <axis xyz="-0.360276 0.693402 0.624016"/>
++</joint>
++
++<joint name="Revolute_95" type="continuous">
++  <origin xyz="-0.036391 0.040414 0.023967" rpy="0 0 0"/>
++  <parent link="wheel_frame_BR_1"/>
++  <child link="roller_33_1"/>
++  <axis xyz="-0.125122 -0.693402 -0.709604"/>
++</joint>
++
++</robot>

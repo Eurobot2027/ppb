@@ -10,6 +10,7 @@ import numpy as np
 import yaml
 from geometry_msgs.msg import Point, Pose, Quaternion
 from importlib.resources import files
+from mam_eurobot_2026.vision.config import lookup_camera_config
 
 
 def resolve_existing_path(path_str: str) -> Path | None:
@@ -328,13 +329,3 @@ def pose_from_transform(transform: np.ndarray) -> Pose:
         w=float(quat[3]),
     )
     return pose
-
-
-def lookup_camera_config(cfg: dict[str, Any], image_topic: str) -> dict[str, Any]:
-    cameras = cfg.get("cameras", [])
-    for camera in cameras:
-        if camera.get("image_topic") == image_topic:
-            return camera
-    if cameras:
-        return cameras[0]
-    raise ValueError("No cameras defined in vision configuration")

@@ -1,0 +1,10 @@
+diff --git a/.gitignore b/.gitignore
+index 4ad7409..9e4f0cc 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1 +1,2 @@
+-.devcontainer/devcontainer.json
+\ No newline at end of file
++.devcontainer/devcontainer.
++.DS_store
+\ No newline at end of file

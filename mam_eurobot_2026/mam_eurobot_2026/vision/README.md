@@ -1,4 +1,49 @@
-# Vision Nodes
+# Vision Nodes — inherited 2026 ROS pipeline
+
+This folder's major developments are already in PPB history, including the
+ArUco/color feature branches and S8 vision work. The [recovery report](../../../docs/RECOVERY.md)
+distinguishes them from missing experiments. For native **Raspberry Pi Camera**
+capture, use [camera/README.md](../../../camera/README.md); these ROS nodes do not
+open the Pi camera or implement ESP32 communication.
+
+The current YAML is a **2026 simulator configuration**. IDs 21/36/47/5, sizes,
+landmark poses, cursor height and robot extrinsics must be rechecked for 2027.
+Do not reuse the historical `.pkl` as Pi calibration. The legacy ROS loaders still
+allow approximate HFOV intrinsics and trusted pickle calibration; the new native
+Pi tool instead requires measured JSON for metric pose.
+
+## Coordinate chain and recovered findings
+
+PnP estimates `T_camera_marker` (marker coordinates into the camera optical
+frame). A fixed known reference marker gives
+`T_world_camera = T_world_marker * inverse(T_camera_marker)`. Observing the
+robot's marker gives
+`T_world_base = T_world_camera * T_camera_marker * inverse(T_base_marker)`.
+This last case assumes an **external fixed camera**, not an onboard Pi camera.
+
+`vision_settings.yaml` now separates fixed marker-solved `cameras` from mobile
+`image_sources`. `/front_camera` explicitly uses `front_camera_optical_frame`
+from the robot URDF. Previously an unmatched image topic silently selected the
+first fixed-camera config, mislabelling front-camera detections as observations
+from the external pole camera. Unknown topics now raise an error; add each real
+source explicitly. Different physical cameras also need their own calibration.
+
+Use one TF authority per link. Do not simultaneously publish `map -> base_link`
+from simulated truth and robot vision. For real odometry fusion, design the
+`map -> odom -> base_link -> camera` chain before enabling publishers.
+
+`detected_crates_tf.py` transforms `/aruco/detections` into the target frame
+(`/detected_crates`, default `map`) using image-time TF. Bad/missing TF means
+objects cannot be located in the field; frame names alone do not provide a pose.
+Review [localization](../localization/README.md) before connecting planning.
+
+Next: measure Pi intrinsics/extrinsics, confirm legal 2027 targets, add pose
+quality/reprojection checks and stale-data handling, then fuse with ESP32
+odometry. Existing detection instability is an upstream observation, not resolved
+by recovering branches. See the [2027 plan](../../../docs/EUROBOT_2027.md).
+
+## Existing node reference
+
 Reference for the ROS 2 nodes in `mam_eurobot_2026/vision`: what each one does, its topics/parameters, and how to launch it.
 
 ## aruco_detector
@@ -74,14 +119,14 @@ Reference for the ROS 2 nodes in `mam_eurobot_2026/vision`: what each one does, 
 - **Outputs**: OpenCV window (press `q` to quit). In headless environments, periodically dumps `/tmp/camera_viewer_sample.jpg`.
 - **Run (not registered as a console script)**:
   ```bash
-  python3 src/mam_eurobot_2026/mam_eurobot_2026/vision/camera_viewer.py /front_camera
+  python3 mam_eurobot_2026/mam_eurobot_2026/vision/camera_viewer.py /front_camera
   ```
 
 ## show_front_camera.py
 - Legacy viewer fixed to `/front_camera` and `/front_camera/camera_info` (similar to `camera_viewer`). Use only if you need a quick viewer; `camera_viewer` is preferred.
 - **Run**:
   ```bash
-  python3 src/mam_eurobot_2026/mam_eurobot_2026/vision/show_front_camera.py
+  python3 mam_eurobot_2026/mam_eurobot_2026/vision/show_front_camera.py
   ```
 ## ISSUE
 Aruco detector is not stable and does not detect all arucos. It might be a problem of camera. Recommend camera parameters fixed.
