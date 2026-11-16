@@ -9,6 +9,8 @@ install/
 log/
 camera/runs/
 
+sync-from-pi.sh
+
 # Local editor settings and Python packaging/test output
 .vscode/
 *.egg-info/
