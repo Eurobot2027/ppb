@@ -60,3 +60,21 @@ This supersedes the earlier statement that ROS was absent for *vision* testing.
 Gazebo/Nav2 and real Pi/libcamera/ESP32 hardware remain unverified. A desktop
 Humble build does not establish a compatible Pi camera OS/Python/libcamera ABI;
 follow [ROS2.md](../camera/ROS2.md) before deployment.
+
+## ArUco route preview — 18 November 2026
+
+`camera.pi_path` reuses the existing image-space A* code from `camera/cv_test.py`
+through the shared `camera.path_planning` module. Desktop checks cover shortest
+grid paths, blocked endpoints/corners, partial edge cells, real detection of
+rendered markers, missing/duplicate IDs, MJPEG output and capture cleanup on
+failure or player disconnect.
+
+`python3 -m pytest -q -rs tests`: **28 passed, 1 skipped**. The full suite needed
+loopback socket access outside the sandbox; the ROS integration module skipped
+because this host has no `rclpy`. `git diff --check` passed. FFmpeg decoded three
+consecutive annotated JPEGs, and a temporary Python package build loaded the CLI
+from outside the source tree. The legacy demo's CLI help also loaded successfully.
+
+No ROS adapter, entry point or launch configuration changed; no new Humble build
+or ROS integration run was performed. Pi camera capture, WiFi latency, physical
+obstacle clearance and robot navigation remain unvalidated for this new preview.

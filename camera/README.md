@@ -14,7 +14,7 @@ experiments here. These files survived the fork:
 | File | Advancement | Limit before reuse |
 | --- | --- | --- |
 | `camera_calibration.py` | 8×6 inner-corner checkerboard, subpixel refinement, saved intrinsics/distortion | GUI/V4L2; fixed camera index 2; deletes its capture directory on a new run |
-| `cv_test.py` | Interactive calibrated ArUco pose and axes | Fixed capture/hardware assumptions |
+| `cv_test.py` | Interactive ArUco pose, axes and image-space A* demo | GUI/V4L2; fixed capture assumptions and approximate intrinsics fallback |
 | `aruco_pose_viewer.py` | CLI capture options, headless mode, snapshots, old/new OpenCV API support and PnP fallback | V4L2/MJPG; guesses intrinsics if calibration is missing |
 | `aruco_tcp_flag_sender.py` | Target-ID visibility, periodic `0\n`/`1\n`, reconnects and failure clearing | Arduino-oriented protocol; not ESP32 firmware or a pose stream |
 | `calibration_images/`, `camera_calibration.pkl` | Historical measurements | Not calibration for your Pi camera |
@@ -32,6 +32,7 @@ the separate world/localization pipeline.
 | `camera.capture` | Fresh unannotated photos; refuses an existing capture directory |
 | `camera.calibrate` | Offline checkerboard calibration to JSON with dimensions/RMS; refuses to overwrite |
 | `camera.pi_vision` | Headless ArUco observations, optional measured pose and optional TCP output |
+| `camera.pi_path` | ArUco-to-ArUco A* overlay streamed as MJPEG for SSH viewing |
 
 The detector reuses dictionary/detection/pose helpers from `aruco_pose_viewer.py`,
 including their OpenCV compatibility support. It does not use the inherited
@@ -73,6 +74,44 @@ python3 -m camera.pi_vision --backend opencv --camera-index 0 --frames 100
 
 Picamera2 uses `RGB888` for OpenCV's BGR byte ordering. Start at 640×480 and measure
 performance; 15 FPS is a requested rate, not a hardware performance guarantee.
+
+## Stream an ArUco route to your laptop
+
+`camera.pi_path` reuses the A* planner from `cv_test.py`, now shared in
+`camera.path_planning`, and the detector/capture helpers used by `camera.pi_vision`.
+Stop other camera processes first. With this checkout updated on the Pi, run in
+your laptop's local Bash terminal (VS Code command palette:
+**Terminal: Create New Integrated Terminal (Local)**):
+
+```bash
+ssh -T team4@raspberrypi.local \
+  'cd "$HOME/Desktop/ppb" && /usr/bin/python3 -m camera.pi_path 1 2 --backend picamera2 --camera-index 0 --width 640 --height 480 --fps 15' \
+  | ffplay -loglevel warning -f mjpeg -framerate 15 \
+      -fflags nobuffer -flags low_delay -probesize 32768 -analyzeduration 1 \
+      -framedrop -sync ext -an -i -
+```
+
+Replace the host, repository path and example start/goal IDs `1 2` as needed.
+Both markers must be visible together. The default dictionary is `DICT_4X4_50`;
+`--dictionary` must match the printed markers. All IDs must be unique in the image.
+
+The cyan route is the shortest path on an eight-neighbor pixel grid. Other detected
+markers become rectangular obstacles with padding; diagonals cannot cut blocked
+corners. Missing targets, ambiguous IDs or an unreachable goal clear the route
+and show a message. `--debug-grid` shows blocked cells. `--grid-step-px` (default
+12) and `--obstacle-padding-px` (default 24) control the image-space map.
+
+This is a visual demo for a view of the planning surface, ideally from above.
+It cannot recognize unmarked obstacles or turn perspective-distorted pixels into
+a metric robot route. No calibration or guessed poses are used, and no motor
+commands are sent. A physical route needs measured geometry and robot clearance.
+
+Stdout contains only concatenated annotated JPEGs; diagnostics go to stderr.
+Ctrl+C stops the stream. MJPEG uses more bandwidth than H.264; lower `--jpeg-quality`
+(default 75) or `--fps` if needed, matching the player's `-framerate` to `--fps`.
+For camera-free replay, `--image /path/to/640x480.png` emits one annotated JPEG;
+`--frames N` limits a live run. Pi capture and WiFi latency still need hardware
+validation for this new script.
 
 ## Calibrate your actual Pi camera
 

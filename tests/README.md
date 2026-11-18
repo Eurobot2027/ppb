@@ -6,7 +6,9 @@ NumPy, PyYAML and OpenCV with ArUco. No camera, ROS, ESP32 or container is neede
 Tests exercise rendered ArUco detection and metric scale, blank frames, invalid
 calibration/resolution, image-based checkerboard calibration, CLI shutdown/error
 observations, real stream framing, dropped-data/retry behavior and distinct ROS
-front/external camera frames. They establish software behavior, not hardware
+front/external camera frames. `test_pi_path.py` checks shortest grid routes,
+blocked corners/endpoints, real marker detection and disappearance, ambiguous
+IDs, image edges and the annotated MJPEG CLI. They establish software behavior, not hardware
 accuracy, WiFi performance or robot autonomy. See [validation](../docs/VALIDATION.md).
 
 `test_ros_vision.py` runs real Humble nodes with a rendered image: synchronized
